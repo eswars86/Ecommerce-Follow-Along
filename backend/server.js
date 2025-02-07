@@ -1,31 +1,39 @@
-const express = require('express');
-   const mongoose = require('mongoose');
-   const dotenv = require('dotenv');
-   
-   dotenv.config();  // Load environment variables
+const app = require("./app");
+const connectDatabase = require("./db/database");
 
-   const app = express();
-   const PORT = process.env.PORT || 5000;
+// Handling uncaught Exception when setting up backend server
+process.on("uncaughtException", (err) => {
+    console.log(`Error: ${err.message}`);
+    console.log(`shutting down the server for handling uncaught exception`);
+  });
+  
 
-   // Middleware to parse JSON request body
-   app.use(express.json());
+  // config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+    require("dotenv").config({
+      path: "config/.env",
+    });
+};
 
-   // Example route
-   app.get('/', (req, res) => {
-     res.send('Hello, world!');
-   });
+// connect db
+connectDatabase();
 
-   // Connect to MongoDB
-   mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-     .then(() => {
-       console.log('MongoDB connected successfully');
-     })
-     .catch((err) => {
-       console.error('MongoDB connection error: ', err);
-     });
 
-   // Start the server
-   app.listen(PORT, () => {
-     console.log(`Server is running on port ${PORT}`);
-   });
-   
+// create server
+const server = app.listen(process.env.PORT, () => {
+    console.log(
+      `Server is running on http://localhost:${process.env.PORT}`
+    );
+  });
+
+
+  // unhandled promise rejection(explain error handling when setting up server as you code)
+  process.on("unhandledRejection", (err) => {
+    console.error(`Unhandled Rejection: ${err.message}`);
+    console.log("Shutting down the server due to unhandled promise rejection.");
+    
+    server.close(() => {
+      process.exit(1); // Exit with failure code
+    });
+  });
+  
