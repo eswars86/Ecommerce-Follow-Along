@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../model/userModel");
+const User = require("../User/UserSchema");
 require("dotenv").config();
 
 const authenticate = async (req, res, next) => {
@@ -12,7 +12,7 @@ const authenticate = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1]; // Extract the actual token
 
-    // Ensure SECRET_KEY is set, fallback if missing
+    // ✅ Ensure SECRET_KEY is set, fallback if missing
     const secretKey = process.env.SECRET_KEY || "fallback_secret";
     let decoded;
     
@@ -22,14 +22,14 @@ const authenticate = async (req, res, next) => {
       return res.status(403).json({ message: "Invalid or expired token" });
     }
 
-    // Fetch user from DB (excluding password)
+    // ✅ Fetch user from DB (excluding password)
     const user = await User.findById(decoded.userId).select("-password");
     if (!user) {
       return res.status(404).json({ message: "User not found. Authentication failed." });
     }
 
     req.user = user; // Attach user info to request
-    next(); // Continue to next middleware
+    next(); // ✅ Continue to next middleware
   } catch (error) {
     console.error("Auth Middleware Error:", error);
     return res.status(500).json({ message: "Authentication error" });
