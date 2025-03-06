@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 const uploadPath = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadPath)) {
     fs.mkdirSync(uploadPath, { recursive: true });
-    console.log("Created 'uploads/' directory");
+    console.log("✅ Created 'uploads/' directory");
 }
 
 // Middleware
@@ -44,8 +44,8 @@ app.use(cors({
 app.use("/uploads", express.static("uploads"));
 
 // Import and use routes
-const userRoutes = require("./controller/userRouter");
-const productRoutes = require("./controller/productRouter");
+const userRoutes = require("./User/userRouter");
+const productRoutes = require("./Products/productRouter");
 
 app.use("/user", userRoutes);
 app.use("/products", productRoutes);
@@ -53,10 +53,10 @@ app.use("/products", productRoutes);
 // Error Handling Middleware
 app.use(ErrorHandler);
 
-// Connect to MongoDB database
+// ✅ Connect to MongoDB database
 connectDatabase();
 
-// Start server
+// ✅ Start server
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

@@ -1,11 +1,13 @@
-import Signup from '../components/auth/Signup'
+import Signup from "../components/auth/Signup";
 
-function SignupPage() {
-  return (
-    <div>
-      <Signup/>
-    </div>
-  )
+
+function SignUpPage(){
+  return(
+    <>
+    <Signup/>
+    </>
+  );
 }
 
-export default SignupPage;
+
+export default SignUpPage;

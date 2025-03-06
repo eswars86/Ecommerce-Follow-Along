@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../model/userModel');
+const User = require('./UserSchema');
 require('dotenv').config();
 
 // Signup Route
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       token,
-      user: { userId: user._id, name: user.name }  // Send user details
+      user: { userId: user._id, name: user.name }  // ✅ Send user details
   });
   
   } catch (err) {
