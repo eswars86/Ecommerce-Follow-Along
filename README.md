@@ -170,8 +170,8 @@ In this milestone, we focused on sending and receiving product data between the 
 - Creating an API Endpoint to send product data
 - Receive data on the frontend
 - Dynamically display product data
-Milestone 13: Edit Product Functionality
+## Milestone 13: Edit Product Functionality
 Learning Goals 🎯 Write an endpoint to update existing data in MongoDB. Autofill forms with previous data for editing.
 
-Milestone 14: Delete Product Functionality
+## Milestone 14: Delete Product Functionality
 Learning Goals 🎯 Write an endpoint to update existing data in MongoDB. Deletes the product from the page
