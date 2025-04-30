@@ -365,3 +365,38 @@ By the end of this milestone, you will:
 Learn how to create a JWT token using the jsonwebtoken package.
 Understand how to store the token inside a browser cookie.
 Set an expiration time for the cookie using maxAge.
+
+
+📍 Milestone 34 - Validating JWT Token from Cookie
+✅ Overview
+In this milestone, we implemented JWT token validation using cookies to ensure secure access to protected routes. This is a key step in building authenticated full-stack applications.
+
+🎯 Learning Outcomes
+Extracted JWT token from browser cookies.
+
+Sent the token to the backend for verification.
+
+Created middleware in the backend to validate the token.
+
+Ensured protected routes/pages can only be accessed by authenticated users.
+
+🛠️ What Was Implemented
+Frontend
+Retrieved the JWT token from cookies on each page load.
+
+Sent the token to the backend for validation before rendering protected content.
+
+Backend
+Created a middleware function verifyToken to:
+
+Extract the JWT from cookies.
+
+Verify the token using the secret key.
+
+Grant or deny access based on the result.
+
+Protected Routing
+Integrated the token verification on all protected routes/pages.
+
+Unauthorized users are redirected to the login page if no valid token is found.
+
